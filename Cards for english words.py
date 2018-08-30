@@ -3,8 +3,17 @@
 import random
 import os
 
+# Заменить .txt на БД
+
 def opening_dictionary():
-    """ dictionary[*][0] - английское слово, dictionary[*][1] - его перевод"""
+    """ Открывает файл-словарь Dictionary.txt и передает из него случайно
+    перемешанные данные в переменную dictionary.
+
+    dictionary = [[str, str], ..., [str, str]]
+        dictionary[*][0] - английское слово
+        dictionary[*][1] - его перевод
+    """
+
     dictionary = []
 
     with open('Dictionary.txt', 'r') as file:
@@ -13,16 +22,17 @@ def opening_dictionary():
             if line == '':
                 break
             dictionary.append(line.rstrip().split(' - '))
-            
+
+    # Перемешивает словарь
     random.shuffle(dictionary)
 
     return dictionary
 
 
 def run(dictionary):
-    """ Прогоняет последовательно по словарю, а так же, показывает сколько
-    осталось слов в прогоне.
-    """
+    """ Последовательно проходит по перемешанному словарю указанное количество
+    слов, прося ввести правильный вариант перевода."""
+
     number = int(input('Введите количество слов для повторения:\n'))
 
     for ind, value in enumerate(dictionary[: number]):
@@ -49,6 +59,7 @@ def run(dictionary):
 def main():
     dictionary = opening_dictionary()
     run(dictionary)
+
 
 
 if __name__ == '__main__':
